@@ -10,7 +10,7 @@ func DetectArchitecture() (string, error) {
 	cmd := exec.Command("uname", "-m")
 	output, err := cmd.Output()
 	if err != nil {
-		return "", fmt.Errorf("erro ao verificar arquitetura: %w", err)
+		return "", fmt.Errorf("failed to detect architecture: %w", err)
 	}
 
 	return strings.TrimSpace(string(output)), nil
