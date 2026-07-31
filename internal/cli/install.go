@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/marlonzl7/kiban/internal/detector"
+	"github.com/marlonzl7/kiban/internal/loader"
 	"github.com/spf13/cobra"
 )
 
@@ -37,5 +38,13 @@ var installCmd = &cobra.Command{
 		fmt.Println("PACKAGE_MANAGER:", packageManager)
 		fmt.Println("ARCHITECTURE:", arch)
 		fmt.Println("IS_SUDO_AVAILABLE:", sudoAvailable)
+
+		setupFile, err := loader.LoadSetupFile("setup.yaml")
+		if err != nil {
+			fmt.Println(err.Error())
+			return
+		}
+
+		fmt.Printf("SETUP_FILE: %+v\n", setupFile)
 	},
 }
