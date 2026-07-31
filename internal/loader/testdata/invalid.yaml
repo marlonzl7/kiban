@@ -1,0 +1,15 @@
+version: 1
+
+tools
+  languages:
+    - java@21
+    - node@20
+    - python
+  containers:
+    - docker
+  utils:
+    - git
+    - zsh
+    - curl
+  editors:
+    - neovim
