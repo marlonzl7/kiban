@@ -3,33 +3,41 @@ package loader
 import (
 	"errors"
 	"fmt"
-	"os"
+	"io/fs"
 	"path/filepath"
+	"strings"
 )
 
 func LoadToolsFromDir(dir string) ([]Tool, error) {
 	var tools []Tool
 	var errs []error
 
-	entries, err := os.ReadDir(dir)
-	if err != nil {
-		return tools, fmt.Errorf("failed to read tools dir: %w", err)
-	}
-
-	for _, entry := range entries {
-		if entry.IsDir() {
-			continue
+	err := filepath.WalkDir(dir, func(path string, d fs.DirEntry, err error) error {
+		if err != nil {
+			return err
 		}
 
-		path := filepath.Join(dir, entry.Name())
+		if d.IsDir() {
+			return nil
+		}
+
+		if !strings.HasSuffix(d.Name(), ".yaml") {
+			return nil
+		}
 
 		tool, err := LoadToolFile(path)
 		if err != nil {
 			errs = append(errs, fmt.Errorf("%s: %w", path, err))
-			continue
+			return nil
 		}
 
 		tools = append(tools, tool)
+
+		return nil
+	})
+
+	if err != nil {
+		errs = append(errs, fmt.Errorf("failed to load tools: %w", err))
 	}
 
 	return tools, errors.Join(errs...)

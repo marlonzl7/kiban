@@ -1,0 +1,17 @@
+name: docker
+description: Container runtime
+category: containers
+version_flag: docker --version
+
+install:
+  apt:
+    steps:
+      - cmd: apt-get update
+        sudo: true
+
+verify:
+  cmd: docker --version
+  expect: "Docker version"
+
+post_install:
+  message: "Adicione seu usuário ao grupo docker"
