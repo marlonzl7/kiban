@@ -1,0 +1,17 @@
+name: git
+description: Version control system
+category: utils
+version_flag: git --version
+
+install:
+  apt:
+    steps:
+      - cmd: apt-get install -y git
+        sudo: true
+
+verify:
+  cmd: git --version
+  expect: "git version"
+
+post_install:
+  message: ""
