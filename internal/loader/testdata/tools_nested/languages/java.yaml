@@ -1,0 +1,17 @@
+name: java
+description: Java Development Kit
+category: languages
+version_flag: java --version
+
+install:
+  apt:
+    steps:
+      - cmd: apt-get install -y openjdk-21-jdk
+        sudo: true
+
+verify:
+  cmd: java --version
+  expect: "openjdk"
+
+post_install:
+  message: ""
