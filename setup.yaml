@@ -1,0 +1,9 @@
+version: 1
+tools:
+  languages:
+    - java
+  containers:
+    - docker
+  utils:
+    - git
+    - nginx

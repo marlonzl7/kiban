@@ -5,6 +5,7 @@ import (
 
 	"github.com/marlonzl7/kiban/internal/detector"
 	"github.com/marlonzl7/kiban/internal/loader"
+	"github.com/marlonzl7/kiban/internal/validator"
 	"github.com/spf13/cobra"
 )
 
@@ -32,12 +33,15 @@ var installCmd = &cobra.Command{
 
 		sudoAvailable := detector.IsSudoAvailable()
 
-		fmt.Println("OS:", info.ID)
-		fmt.Println("VERSION:", info.Version)
-		fmt.Println("LIKE:", info.IDLike)
-		fmt.Println("PACKAGE_MANAGER:", packageManager)
-		fmt.Println("ARCHITECTURE:", arch)
-		fmt.Println("IS_SUDO_AVAILABLE:", sudoAvailable)
+		sudoAvailableMsg := ""
+
+		if sudoAvailable {
+			sudoAvailableMsg = "available"
+		} else {
+			sudoAvailableMsg = "not available"
+		}
+
+		fmt.Printf("Environment: %s (%s) | %s | sudo %s\n", info.ID, packageManager, arch, sudoAvailableMsg)
 
 		setupFile, err := loader.LoadSetupFile("setup.yaml")
 		if err != nil {
@@ -45,6 +49,23 @@ var installCmd = &cobra.Command{
 			return
 		}
 
-		fmt.Printf("SETUP_FILE: %+v\n", setupFile)
+		fmt.Printf("setup file version %d loaded\n", setupFile.Version)
+
+		tools, err := loader.LoadToolsFromDir("tools")
+		if err != nil {
+			fmt.Println(err.Error())
+			return
+		}
+
+		fmt.Printf("supported tools loaded\n")
+
+		errs := validator.Validate(setupFile, tools)
+		if errs != nil {
+			fmt.Printf("invalid setup file: the file structure contains errors\n")
+			fmt.Println(errs.Error())
+			return
+		}
+
+		fmt.Printf("valid setup. starting tool installation...\n")
 	},
 }
