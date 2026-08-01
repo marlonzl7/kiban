@@ -1,0 +1,4 @@
+version: 1
+tools:
+  languages:
+    - "@21"

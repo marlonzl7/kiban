@@ -1,0 +1,6 @@
+version: 1
+tools:
+  containers:
+    - docker
+  utils:
+    - git
