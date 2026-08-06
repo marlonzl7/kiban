@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/marlonzl7/kiban/internal/detector"
+	"github.com/marlonzl7/kiban/internal/executor"
 	"github.com/marlonzl7/kiban/internal/loader"
 	"github.com/marlonzl7/kiban/internal/validator"
 	"github.com/spf13/cobra"
@@ -67,5 +68,9 @@ var installCmd = &cobra.Command{
 		}
 
 		fmt.Printf("valid setup. starting tool installation...\n")
+
+		summary := executor.InstallAll(setupFile, tools, packageManager, arch)
+
+		fmt.Printf("Summary: %d installed, %d failed\n", summary.Installed, summary.Failed)
 	},
 }

@@ -6,7 +6,7 @@ version_flag: docker --version
 install:
   apt:
     steps:
-      - cmd: apt-get install docker.io
+      - cmd: apt-get install -y docker.io
         sudo: true
 
 verify:
