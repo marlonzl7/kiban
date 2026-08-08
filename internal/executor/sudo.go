@@ -13,4 +13,3 @@ func ValidateSudoSession() error {
 
 	return cmd.Run()
 }
-

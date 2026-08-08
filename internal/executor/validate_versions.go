@@ -17,7 +17,7 @@ func ValidateVersionsMandatory(setupFile loader.SetupFile, tools []loader.Tool, 
 			toolName, toolVersion, _ := strings.Cut(value, "@")
 
 			tool := nameToTool[toolName]
-			
+
 			_, err := ResolveVersion(tool, toolVersion, packageManager)
 			if err != nil {
 				errs = append(errs, err)
