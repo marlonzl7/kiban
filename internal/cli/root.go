@@ -19,7 +19,7 @@ var rootCmd = &cobra.Command{
 var setupFilePath string
 
 func init() {
-	installCmd.Flags().StringVar(&setupFilePath, "file", "setup.yaml", "path to the setup.yaml file")
+	installCmd.Flags().StringVarP(&setupFilePath, "file", "f", "setup.yaml", "path to the setup.yaml file")
 	rootCmd.AddCommand(installCmd)
 }
 
