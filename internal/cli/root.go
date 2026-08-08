@@ -10,6 +10,7 @@ import (
 var rootCmd = &cobra.Command{
 	Use:   "kiban",
 	Short: "CLI for setting up development environments",
+	Version: version,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("Kiban - Development environment setup CLI")
 	},
