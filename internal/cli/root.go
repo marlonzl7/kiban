@@ -8,8 +8,9 @@ import (
 )
 
 var rootCmd = &cobra.Command{
-	Use:   "kiban",
-	Short: "CLI for setting up development environments",
+	Use:     "kiban",
+	Short:   "CLI for setting up development environments",
+	Version: version,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("Kiban - Development environment setup CLI")
 	},
@@ -18,7 +19,7 @@ var rootCmd = &cobra.Command{
 var setupFilePath string
 
 func init() {
-	installCmd.Flags().StringVar(&setupFilePath, "file", "setup.yaml", "path to the setup.yaml file")
+	installCmd.Flags().StringVarP(&setupFilePath, "file", "f", "setup.yaml", "path to the setup.yaml file")
 	rootCmd.AddCommand(installCmd)
 }
 
