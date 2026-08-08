@@ -31,6 +31,14 @@ func InstallAll(setupFile loader.SetupFile, tools []loader.Tool, packageManager,
 				continue
 			}
 
+			toolVersion, err := ResolveVersion(tool, toolVersion, packageManager)
+			if err != nil {
+				fmt.Printf("[FAIL] ")
+				fmt.Printf("(%s)\n", err)
+				summary.Failed++
+				continue
+			}
+
 			steps := tool.Install[packageManager].Steps
 			if steps == nil {
 				fmt.Printf("[FAIL] ")
@@ -39,7 +47,7 @@ func InstallAll(setupFile loader.SetupFile, tools []loader.Tool, packageManager,
 				continue
 			}
 
-			err := RunSteps(steps, toolVersion, arch)
+			err = RunSteps(steps, toolVersion, arch)
 			if err != nil {
 				fmt.Printf("[FAIL] ")
 				fmt.Printf("(%s)\n", err)

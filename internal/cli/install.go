@@ -50,7 +50,7 @@ var installCmd = &cobra.Command{
 			return
 		}
 
-		fmt.Printf("setup file version %d loaded\n", setupFile.Version)
+		fmt.Printf("Setup file version %d loaded\n", setupFile.Version)
 
 		tools, err := loader.LoadToolsFromDir(loader.ToolsFS, ".")
 		if err != nil {
@@ -58,15 +58,21 @@ var installCmd = &cobra.Command{
 			return
 		}
 
-		fmt.Printf("supported tools loaded\n")
+		fmt.Printf("Supported tools loaded\n")
 
-		errs := validator.Validate(setupFile, tools)
+		errs := validator.ValidateSchema(setupFile, tools)
 		if errs != nil {
 			fmt.Printf("invalid setup file: the file structure contains errors\n")
 			fmt.Println(errs.Error())
 			return
 		}
 
+		errs = executor.ValidateVersionsMandatory(setupFile, tools, packageManager)
+		if errs != nil {
+			fmt.Printf("invalid setup file: the file structure contains errors\n")
+			fmt.Println(errs.Error())
+			return
+		}
 
 		fmt.Printf("Valid setup. starting tool installation...\n")
 
