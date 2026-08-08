@@ -44,7 +44,7 @@ var installCmd = &cobra.Command{
 
 		fmt.Printf("Environment: %s (%s) | %s | sudo %s\n", info.ID, packageManager, arch, sudoAvailableMsg)
 
-		setupFile, err := loader.LoadSetupFile("setup.yaml")
+		setupFile, err := loader.LoadSetupFile(setupFilePath)
 		if err != nil {
 			fmt.Println(err.Error())
 			return
