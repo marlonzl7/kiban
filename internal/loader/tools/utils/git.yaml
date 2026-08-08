@@ -1,5 +1,5 @@
 name: git
-description: Version control system
+description: Distributed version control system
 category: utils
 version_flag: git --version
 

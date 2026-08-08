@@ -1,0 +1,17 @@
+name: zip
+description: Utility for creating ZIP archives
+category: utils
+version_flag: zip --version
+
+install:
+  apt:
+    steps:
+      - cmd: apt-get install -y zip
+        sudo: true
+
+verify:
+  cmd: zip --version
+  expect: "Copyright (c) 1990-2008 Info-ZIP"
+
+post_install:
+  message: ""

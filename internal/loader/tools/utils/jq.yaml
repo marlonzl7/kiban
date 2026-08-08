@@ -1,0 +1,17 @@
+name: jq
+description: Command-line JSON processor for parsing and transforming data
+category: utils
+version_flag: jq --version
+
+install:
+  apt:
+    steps:
+      - cmd: apt-get install -y jq
+        sudo: true
+
+verify:
+  cmd: jq --version
+  expect: "jq"
+
+post_install:
+  message: ""

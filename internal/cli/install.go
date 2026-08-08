@@ -52,7 +52,7 @@ var installCmd = &cobra.Command{
 
 		fmt.Printf("setup file version %d loaded\n", setupFile.Version)
 
-		tools, err := loader.LoadToolsFromDir("tools")
+		tools, err := loader.LoadToolsFromDir(loader.ToolsFS, ".")
 		if err != nil {
 			fmt.Println(err.Error())
 			return

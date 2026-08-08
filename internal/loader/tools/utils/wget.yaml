@@ -1,0 +1,17 @@
+name: wget
+description: Command-line utility for downloading files from the web
+category: utils
+version_flag: wget --version
+
+install:
+  apt:
+    steps:
+      - cmd: apt-get install -y wget
+        sudo: true
+
+verify:
+  cmd: wget --version
+  expect: "GNU Wget"
+
+post_install:
+  message: ""

@@ -1,5 +1,5 @@
 name: docker
-description: Container runtime
+description: Container platform for building and running applications
 category: containers
 version_flag: docker --version
 

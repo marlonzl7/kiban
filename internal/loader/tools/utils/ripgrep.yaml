@@ -1,0 +1,17 @@
+name: ripgrep
+description: Fast command-line search tool for finding text in files
+category: utils
+version_flag: rg --version
+
+install:
+  apt:
+    steps:
+      - cmd: apt-get install -y ripgrep
+        sudo: true
+
+verify:
+  cmd: rg --version
+  expect: "ripgrep"
+
+post_install:
+  message: ""

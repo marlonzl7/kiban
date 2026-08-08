@@ -1,0 +1,17 @@
+name: vim
+description: Terminal-based modal text editor
+category: utils
+version_flag: vim --version
+
+install:
+  apt:
+    steps:
+      - cmd: apt-get install -y vim
+        sudo: true
+
+verify:
+  cmd: vim --version
+  expect: VIM
+
+post_install:
+  message: ""
