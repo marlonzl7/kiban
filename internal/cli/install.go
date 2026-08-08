@@ -67,7 +67,15 @@ var installCmd = &cobra.Command{
 			return
 		}
 
-		fmt.Printf("valid setup. starting tool installation...\n")
+
+		fmt.Printf("Valid setup. starting tool installation...\n")
+
+		err = executor.ValidateSudoSession()
+		if err != nil {
+			fmt.Println("unable to obtain sudo privileges")
+			fmt.Println("check your password and verify whether your user has permission to use sudo")
+			return
+		}
 
 		summary := executor.InstallAll(setupFile, tools, packageManager, arch)
 
