@@ -1,0 +1,17 @@
+name: htop
+description: Interactive process viewer for monitoring system resources
+category: utils
+version_flag: htop --version
+
+install:
+  apt:
+    steps:
+      - cmd: apt-get install -y htop
+        sudo: true
+
+verify:
+  cmd: htop --version
+  expect: "htop"
+
+post_install:
+  message: ""

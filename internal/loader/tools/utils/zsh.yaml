@@ -1,0 +1,17 @@
+name: zsh
+description: Interactive shell with advanced customization features
+category: utils
+version_flag: zsh --version
+
+install:
+  apt:
+    steps:
+      - cmd: apt-get install -y zsh
+        sudo: true
+
+verify:
+  cmd: zsh --version
+  expect: "zsh"
+
+post_install:
+  message: ""

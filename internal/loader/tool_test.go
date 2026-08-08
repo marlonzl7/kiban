@@ -5,7 +5,7 @@ import (
 )
 
 func TestLoadToolFile_Success(t *testing.T) {
-	tool, err := LoadToolFile("testdata/docker.yaml")
+	tool, err := LoadToolFile(toolsFS, "docker.yaml")
 	if err != nil {
 		t.Fatalf("unexpected error: %v", err)
 	}
@@ -30,7 +30,7 @@ func TestLoadToolFile_Success(t *testing.T) {
 }
 
 func TestLoadToolFile_FileNotFound(t *testing.T) {
-	_, err := LoadToolFile("testdata/nao-existe")
+	_, err := LoadToolFile(toolsFS, "nao-existe")
 
 	if err == nil {
 		t.Error("expected an error, got nil")
@@ -38,7 +38,7 @@ func TestLoadToolFile_FileNotFound(t *testing.T) {
 }
 
 func TestLoadToolFile_BadFormat(t *testing.T) {
-	_, err := LoadToolFile("testdata/invalid.yaml")
+	_, err := LoadToolFile(toolsFS, "invalid.yaml")
 
 	if err == nil {
 		t.Error("expected an error, got nil")

@@ -1,0 +1,17 @@
+name: neovim
+description: Extensible text editor based on Vim
+category: utils
+version_flag: nvim --version
+
+install:
+  apt:
+    steps:
+      - cmd: apt-get install -y neovim
+        sudo: true
+
+verify:
+  cmd: nvim --version
+  expect: "NVIM"
+
+post_install:
+  message: ""

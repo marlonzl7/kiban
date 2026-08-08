@@ -4,15 +4,14 @@ import (
 	"errors"
 	"fmt"
 	"io/fs"
-	"path/filepath"
 	"strings"
 )
 
-func LoadToolsFromDir(dir string) ([]Tool, error) {
+func LoadToolsFromDir(fsys fs.FS, root string) ([]Tool, error) {
 	var tools []Tool
 	var errs []error
 
-	err := filepath.WalkDir(dir, func(path string, d fs.DirEntry, err error) error {
+	err := fs.WalkDir(fsys, root, func(name string, d fs.DirEntry, err error) error {
 		if err != nil {
 			return err
 		}
@@ -25,9 +24,9 @@ func LoadToolsFromDir(dir string) ([]Tool, error) {
 			return nil
 		}
 
-		tool, err := LoadToolFile(path)
+		tool, err := LoadToolFile(fsys, name)
 		if err != nil {
-			errs = append(errs, fmt.Errorf("%s: %w", path, err))
+			errs = append(errs, fmt.Errorf("%s: %w", name, err))
 			return nil
 		}
 

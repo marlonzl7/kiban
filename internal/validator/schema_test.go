@@ -7,7 +7,7 @@ import (
 	"github.com/marlonzl7/kiban/internal/loader"
 )
 
-func TestValidate_AllSupported(t *testing.T) {
+func TestValidateSchema_AllSupported(t *testing.T) {
 	sf, err := loader.LoadSetupFile("testdata/setup_valid.yaml")
 	if err != nil {
 		t.Fatalf("unexpected error: %v", err)
@@ -18,13 +18,13 @@ func TestValidate_AllSupported(t *testing.T) {
 		{Name: "git"},
 	}
 
-	err = Validate(sf, catalog)
+	err = ValidateSchema(sf, catalog)
 	if err != nil {
 		t.Errorf("expected no error, got: %v", err)
 	}
 }
 
-func TestValidate_UnsupportedTool(t *testing.T) {
+func TestValidateSchema_UnsupportedTool(t *testing.T) {
 	sf, err := loader.LoadSetupFile("testdata/setup_unsupported.yaml")
 	if err != nil {
 		t.Fatalf("unexpected error: %v", err)
@@ -34,7 +34,7 @@ func TestValidate_UnsupportedTool(t *testing.T) {
 		{Name: "docker"},
 	}
 
-	err = Validate(sf, catalog)
+	err = ValidateSchema(sf, catalog)
 	if err == nil {
 		t.Fatal("expected an error, got nil")
 	}
@@ -44,7 +44,7 @@ func TestValidate_UnsupportedTool(t *testing.T) {
 	}
 }
 
-func TestValidate_EmptyToolName(t *testing.T) {
+func TestValidateSchema_EmptyToolName(t *testing.T) {
 	sf, err := loader.LoadSetupFile("testdata/setup_empty_name.yaml")
 	if err != nil {
 		t.Fatalf("unexpected error: %v", err)
@@ -54,7 +54,7 @@ func TestValidate_EmptyToolName(t *testing.T) {
 		{Name: "docker"},
 	}
 
-	err = Validate(sf, catalog)
+	err = ValidateSchema(sf, catalog)
 	if err == nil {
 		t.Fatal("expected an error, got nil")
 	}

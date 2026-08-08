@@ -2,19 +2,20 @@ package loader
 
 import (
 	"fmt"
-	"os"
+	"io/fs"
 
 	"gopkg.in/yaml.v3"
 )
 
 type Tool struct {
-	Name        string             `yaml:"name"`
-	Description string             `yaml:"description"`
-	Category    string             `yaml:"category"`
-	VersionFlag string             `yaml:"version_flag"`
-	Install     map[string]Install `yaml:"install"`
-	Verify      Verify             `yaml:"verify"`
-	PostInstall PostInstall        `yaml:"post_install"`
+	Name           string             `yaml:"name"`
+	Description    string             `yaml:"description"`
+	Category       string             `yaml:"category"`
+	VersionFlag    string             `yaml:"version_flag"`
+	Install        map[string]Install `yaml:"install"`
+	Verify         Verify             `yaml:"verify"`
+	PostInstall    PostInstall        `yaml:"post_install"`
+	DefaultVersion string             `yaml:"default_version"`
 }
 
 type Install struct {
@@ -35,8 +36,8 @@ type PostInstall struct {
 	Message string `yaml:"message"`
 }
 
-func LoadToolFile(path string) (Tool, error) {
-	data, err := os.ReadFile(path)
+func LoadToolFile(fsys fs.FS, name string) (Tool, error) {
+	data, err := fs.ReadFile(fsys, name)
 	if err != nil {
 		return Tool{}, fmt.Errorf("failed to load tool files: %w", err)
 	}

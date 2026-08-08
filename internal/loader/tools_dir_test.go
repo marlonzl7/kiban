@@ -1,11 +1,14 @@
 package loader
 
 import (
+	"os"
 	"testing"
 )
 
+var toolsFS = os.DirFS("testdata")
+
 func TestLoadToolsFromDir_AllValid(t *testing.T) {
-	tools, err := LoadToolsFromDir("testdata/tools_valid")
+	tools, err := LoadToolsFromDir(toolsFS, "tools_valid")
 
 	if err != nil {
 		t.Fatalf("unexpected error: %v", err)
@@ -17,7 +20,7 @@ func TestLoadToolsFromDir_AllValid(t *testing.T) {
 }
 
 func TestLoadToolsFromDir_NestedFolders(t *testing.T) {
-	tools, err := LoadToolsFromDir("testdata/tools_nested")
+	tools, err := LoadToolsFromDir(toolsFS, "tools_nested")
 	if err != nil {
 		t.Fatalf("unexpected error: %v", err)
 	}
@@ -28,7 +31,7 @@ func TestLoadToolsFromDir_NestedFolders(t *testing.T) {
 }
 
 func TestLoadToolsFromDir_DirNotFound(t *testing.T) {
-	_, err := LoadToolsFromDir("testdata/does-not-exist")
+	_, err := LoadToolsFromDir(toolsFS, "does-not-exist")
 
 	if err == nil {
 		t.Error("expected an error, got nil")
@@ -36,7 +39,7 @@ func TestLoadToolsFromDir_DirNotFound(t *testing.T) {
 }
 
 func TestLoadToolsFromDir_MixedValidAndInvalid(t *testing.T) {
-	tools, err := LoadToolsFromDir("testdata/tools_mixed")
+	tools, err := LoadToolsFromDir(toolsFS, "tools_mixed")
 
 	if err == nil {
 		t.Error("expected an error due to broken.yaml, got nil")

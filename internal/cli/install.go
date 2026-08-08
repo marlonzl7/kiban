@@ -44,30 +44,44 @@ var installCmd = &cobra.Command{
 
 		fmt.Printf("Environment: %s (%s) | %s | sudo %s\n", info.ID, packageManager, arch, sudoAvailableMsg)
 
-		setupFile, err := loader.LoadSetupFile("setup.yaml")
+		setupFile, err := loader.LoadSetupFile(setupFilePath)
 		if err != nil {
 			fmt.Println(err.Error())
 			return
 		}
 
-		fmt.Printf("setup file version %d loaded\n", setupFile.Version)
+		fmt.Printf("Setup file version %d loaded\n", setupFile.Version)
 
-		tools, err := loader.LoadToolsFromDir("tools")
+		tools, err := loader.LoadToolsFromDir(loader.ToolsFS, ".")
 		if err != nil {
 			fmt.Println(err.Error())
 			return
 		}
 
-		fmt.Printf("supported tools loaded\n")
+		fmt.Printf("Supported tools loaded\n")
 
-		errs := validator.Validate(setupFile, tools)
+		errs := validator.ValidateSchema(setupFile, tools)
 		if errs != nil {
 			fmt.Printf("invalid setup file: the file structure contains errors\n")
 			fmt.Println(errs.Error())
 			return
 		}
 
-		fmt.Printf("valid setup. starting tool installation...\n")
+		errs = executor.ValidateVersionsMandatory(setupFile, tools, packageManager)
+		if errs != nil {
+			fmt.Printf("invalid setup file: the file structure contains errors\n")
+			fmt.Println(errs.Error())
+			return
+		}
+
+		fmt.Printf("Valid setup. starting tool installation...\n")
+
+		err = executor.ValidateSudoSession()
+		if err != nil {
+			fmt.Println("unable to obtain sudo privileges")
+			fmt.Println("check your password and verify whether your user has permission to use sudo")
+			return
+		}
 
 		summary := executor.InstallAll(setupFile, tools, packageManager, arch)
 

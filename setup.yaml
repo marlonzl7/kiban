@@ -4,3 +4,17 @@ tools:
     - docker
   utils:
     - git
+    - vim
+    - neovim
+    - htop
+    - jq
+    - ripgrep
+    - curl
+    - tree
+    - unzip
+    - wget
+    - xsel
+    - zip
+    - zsh 
+  languages:
+    - java@21

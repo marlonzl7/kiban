@@ -1,0 +1,17 @@
+name: xsel
+description: Command-line tool for accessing and manipulating the X11 clipboard
+category: utils
+version_flag: xsel --version
+
+install:
+  apt:
+    steps:
+      - cmd: apt-get install -y xsel
+        sudo: true
+
+verify:
+  cmd: xsel --version
+  expect: "xsel version"
+
+post_install:
+  message: ""

@@ -1,0 +1,17 @@
+name: tree
+description: Command-line utility for displaying directory structures as a tree
+category: utils
+version_flag: tree --version
+
+install:
+  apt:
+    steps:
+      - cmd: apt-get install -y tree
+        sudo: true
+
+verify:
+  cmd: tree --version
+  expect: "tree"
+
+post_install:
+  message: ""

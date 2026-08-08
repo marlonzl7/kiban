@@ -9,7 +9,7 @@ import (
 	"github.com/marlonzl7/kiban/internal/utils"
 )
 
-func Validate(setupFile loader.SetupFile, tools []loader.Tool) error {
+func ValidateSchema(setupFile loader.SetupFile, tools []loader.Tool) error {
 	nameToTool := utils.NameToTool(tools)
 	var errs []error
 

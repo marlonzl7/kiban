@@ -1,0 +1,17 @@
+name: curl
+description: Command-line tool for transferring data using network protocols
+category: utils
+version_flag: curl --version
+
+install:
+  apt:
+    steps:
+      - cmd: apt-get install -y curl
+        sudo: true
+
+verify:
+  cmd: curl --version
+  expect: "curl"
+
+post_install:
+  message: ""
