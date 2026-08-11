@@ -67,6 +67,13 @@ var installCmd = &cobra.Command{
 			return
 		}
 
+		errs = validator.ValidateStepShellSudoExclusivity(tools)
+		if errs != nil {
+			fmt.Printf("invalid tool catalog: the catalog contains errors\n")
+			fmt.Println(errs.Error())
+			return
+		}
+
 		errs = executor.ValidateVersionsMandatory(setupFile, tools, packageManager)
 		if errs != nil {
 			fmt.Printf("invalid setup file: the file structure contains errors\n")
