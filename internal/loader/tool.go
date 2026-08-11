@@ -25,6 +25,7 @@ type Install struct {
 type Step struct {
 	Command string `yaml:"cmd"`
 	Sudo    bool   `yaml:"sudo"`
+	Shell   bool   `yaml:"shell"`
 }
 
 type Verify struct {
