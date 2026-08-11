@@ -9,11 +9,16 @@ import (
 )
 
 func RunStep(step loader.Step) error {
-	args := utils.BuildArgs(step.Command, step.Sudo)
+	var cmd *exec.Cmd
 
-	cmd := exec.Command(args[0], args[1:]...)
+	if step.Shell {
+		cmd = exec.Command("sh", "-c", step.Command)
+	} else {
+		args := utils.BuildArgs(step.Command, step.Sudo)
+		cmd = exec.Command(args[0], args[1:]...)
+	}
+	
 	output, err := cmd.CombinedOutput()
-
 	if err != nil {
 		return fmt.Errorf("error executing step %q: %w\noutput: %s", step.Command, err, output)
 	}
