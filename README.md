@@ -109,8 +109,7 @@ comandos serão executados no seu sistema.
 
 ## Contribuindo
 
-Quer adicionar uma nova ferramenta ou distro? Veja o `CONTRIBUTING.md`
-(em construção).
+Quer adicionar uma nova ferramenta ou distro? Veja o [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
 ## Status
 
