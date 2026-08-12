@@ -1,0 +1,17 @@
+name: build-essential
+description: Meta-package with essential tools for compiling software (gcc, make, etc)
+category: utils
+version_flag: gcc --version
+
+install:
+  apt:
+    steps:
+      - cmd: apt-get install -y build-essential
+        sudo: true
+
+verify:
+  cmd: gcc --version
+  expect: "gcc"
+
+post_install:
+  message: ""
