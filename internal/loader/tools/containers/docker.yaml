@@ -6,7 +6,31 @@ version_flag: docker --version
 install:
   apt:
     steps:
-      - cmd: apt-get install -y docker.io
+      - cmd: apt-get update
+        sudo: true
+      - cmd: apt-get install -y ca-certificates curl
+        sudo: true
+      - cmd: install -m 0755 -d /etc/apt/keyrings
+        sudo: true
+      - cmd: curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+        sudo: true
+      - cmd: chmod a+r /etc/apt/keyrings/docker.asc
+        sudo: true
+      - cmd: |
+          sudo tee /etc/apt/sources.list.d/docker.sources <<EOF
+          Types: deb
+          URIs: https://download.docker.com/linux/ubuntu
+          Suites: $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}")
+          Components: stable
+          Architectures: $(dpkg --print-architecture)
+          Signed-By: /etc/apt/keyrings/docker.asc
+          EOF
+        shell: true
+      - cmd: apt-get update -y
+        sudo: true
+      - cmd: apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+        sudo: true
+      - cmd: systemctl enable --now docker
         sudo: true
 
 verify:
@@ -14,4 +38,4 @@ verify:
   expect: "Docker version"
 
 post_install:
-  message: "Adicione seu usuário ao grupo docker"
+  message: "Adicione seu usuário ao grupo docker: sudo usermod -aG docker $USER"

@@ -260,7 +260,15 @@ comando funcione corretamente:
   documente o comando real no `cmd`.
 - **Variáveis de ambiente arbitrárias** (`$VARIAVEL`) dentro do `cmd`.
   Os únicos valores dinâmicos aceitos são os marcadores do próprio
-  kiban (`{{version}}`, `{{arch}}`).
+  kiban (`{{version}}`, `{{arch}}`) e a leitura de metadados públicos
+  do próprio sistema (ex: `$VERSION_CODENAME` via `/etc/os-release`,
+  usado para detectar o codinome da distro em processos oficiais de
+  instalação). Essa exceção existe porque o risco que essa regra busca
+  evitar é exfiltração de segredos (tokens, chaves) exportados no
+  ambiente — não se aplica a informação pública do sistema, e nesses
+  casos o valor dinâmico costuma ser necessário para manter
+  compatibilidade entre versões de distro (RNF-06). Qualquer outra
+  variável deve ser questionada.
 - **Comandos compostos sem necessidade real** (ex: `&&` encadeando uma
   ação que não faz parte do processo oficial de instalação da
   ferramenta).
