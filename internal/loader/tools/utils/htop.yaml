@@ -9,6 +9,16 @@ install:
       - cmd: apt-get install -y htop
         sudo: true
 
+  pacman:
+    steps:
+      - cmd: pacman -S --noconfirm htop
+        sudo: true
+
+  dnf:
+    steps:
+      - cmd: dnf install -y htop
+        sudo: true
+
 verify:
   cmd: htop --version
   expect: "htop"

@@ -10,6 +10,16 @@ install:
       - cmd: apt-get install -y openjdk-{{version}}-jdk
         sudo: true
 
+  pacman:
+    steps:
+      - cmd: pacman -S --noconfirm jdk{{version}}-openjdk
+        sudo: true
+
+  dnf:
+    steps:
+      - cmd: dnf install -y java-{{version}}-openjdk
+        sudo: true
+
 verify:
   cmd: java -version
   expect: openjdk version

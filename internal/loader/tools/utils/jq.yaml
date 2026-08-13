@@ -9,6 +9,16 @@ install:
       - cmd: apt-get install -y jq
         sudo: true
 
+  pacman:
+    steps:
+      - cmd: pacman -S --noconfirm jq
+        sudo: true
+
+  dnf:
+    steps:
+      - cmd: dnf install -y jq
+        sudo: true
+
 verify:
   cmd: jq --version
   expect: "jq"

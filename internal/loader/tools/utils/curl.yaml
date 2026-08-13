@@ -9,6 +9,16 @@ install:
       - cmd: apt-get install -y curl
         sudo: true
 
+  pacman:
+    steps:
+      - cmd: pacman -S --noconfirm curl
+        sudo: true
+
+  dnf:
+    steps:
+      - cmd: dnf install -y curl
+        sudo: true
+
 verify:
   cmd: curl --version
   expect: "curl"

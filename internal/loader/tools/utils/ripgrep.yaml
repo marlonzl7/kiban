@@ -9,6 +9,16 @@ install:
       - cmd: apt-get install -y ripgrep
         sudo: true
 
+  pacman:
+    steps:
+      - cmd: pacman -S --noconfirm ripgrep
+        sudo: true
+
+  dnf:
+    steps:
+      - cmd: dnf install -y ripgrep
+        sudo: true
+
 verify:
   cmd: rg --version
   expect: "ripgrep"

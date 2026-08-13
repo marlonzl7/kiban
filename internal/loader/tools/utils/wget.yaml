@@ -9,6 +9,16 @@ install:
       - cmd: apt-get install -y wget
         sudo: true
 
+  pacman:
+    steps:
+      - cmd: pacman -S --noconfirm wget
+        sudo: true
+
+  dnf:
+    steps:
+      - cmd: dnf install -y wget
+        sudo: true
+
 verify:
   cmd: wget --version
   expect: "GNU Wget"

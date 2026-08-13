@@ -9,6 +9,16 @@ install:
       - cmd: apt-get install -y neovim
         sudo: true
 
+  pacman:
+    steps:
+      - cmd: pacman -S --noconfirm neovim
+        sudo: true
+
+  dnf:
+    steps:
+      - cmd: dnf install -y neovim
+        sudo: true
+
 verify:
   cmd: nvim --version
   expect: "NVIM"

@@ -1,0 +1,32 @@
+name: vscode
+description: code editor
+category: editors
+
+install:
+  apt:
+    steps:
+      - cmd: wget https://code.visualstudio.com/Download?_exp_download=fb315fc982#
+        sudo: false
+      - cmd: tar -C /usr/local -xzf vscode_cli_alpine_{{arch}}_cli.tar
+        sudo: true
+      
+  pacman:
+    steps:
+      - cmd: wget https://code.visualstudio.com/Download?_exp_download=fb315fc982#
+        sudo: false
+      - cmd: tar -C /usr/local -xzf vscode_cli_alpine_{{arch}}_cli.tar
+        sudo: true
+
+  dnf:
+    steps:
+      - cmd: wget https://code.visualstudio.com/Download?_exp_download=fb315fc982#
+        sudo: false
+      - cmd: tar -C /usr/local -xzf vscode_cli_alpine_{{arch}}_cli.tar
+        sudo: true
+
+verify:
+  cmd: code --help
+  expect: Visual Studio Code
+
+post_install:
+  message: ""

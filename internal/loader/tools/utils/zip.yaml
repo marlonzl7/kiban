@@ -9,6 +9,16 @@ install:
       - cmd: apt-get install -y zip
         sudo: true
 
+  pacman:
+    steps:
+      - cmd: pacman -S --noconfirm zip
+        sudo: true
+
+  dnf:
+    steps:
+      - cmd: dnf install -y zip
+        sudo: true
+
 verify:
   cmd: zip --version
   expect: "Copyright (c) 1990-2008 Info-ZIP"
