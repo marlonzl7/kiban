@@ -9,6 +9,16 @@ install:
       - cmd: apt-get install -y build-essential
         sudo: true
 
+  pacman:
+    steps:
+      - cmd: pacman -S --noconfirm base-devel
+        sudo: true
+
+  dnf:
+    steps:
+      - cmd: dnf groupinstall -y development-tools
+        sudo: true
+
 verify:
   cmd: gcc --version
   expect: "gcc"

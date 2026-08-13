@@ -9,6 +9,16 @@ install:
       - cmd: apt-get install -y zsh
         sudo: true
 
+  pacman:
+    steps:
+      - cmd: pacman -S --noconfirm zsh
+        sudo: true
+
+  dnf:
+    steps:
+      - cmd: dnf install -y zsh
+        sudo: true
+
 verify:
   cmd: zsh --version
   expect: "zsh"

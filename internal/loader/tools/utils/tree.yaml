@@ -9,6 +9,16 @@ install:
       - cmd: apt-get install -y tree
         sudo: true
 
+  pacman:
+    steps:
+      - cmd: pacman -S --noconfirm tree
+        sudo: true
+
+  dnf:
+    steps:
+      - cmd: dnf install -y tree
+        sudo: true
+
 verify:
   cmd: tree --version
   expect: "tree"

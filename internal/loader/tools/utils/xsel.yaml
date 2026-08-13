@@ -9,6 +9,16 @@ install:
       - cmd: apt-get install -y xsel
         sudo: true
 
+  pacman:
+    steps:
+      - cmd: pacman -S --noconfirm xsel
+        sudo: true
+
+  dnf:
+    steps:
+      - cmd: dnf install -y xsel
+        sudo: true
+
 verify:
   cmd: xsel --version
   expect: "xsel version"

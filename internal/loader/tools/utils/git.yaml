@@ -9,6 +9,16 @@ install:
       - cmd: apt-get install -y git
         sudo: true
 
+  pacman:
+    steps:
+      - cmd: pacman -S --noconfirm git
+        sudo: true
+
+  dnf:
+    steps:
+      - cmd: dnf install -y git
+        sudo: true
+
 verify:
   cmd: git --version
   expect: "git version"

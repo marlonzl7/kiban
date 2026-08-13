@@ -33,6 +33,30 @@ install:
       - cmd: systemctl enable --now docker
         sudo: true
 
+  pacman:
+    steps:
+      - cmd: pacman -S --noconfirm docker
+        sudo: true
+      - cmd: systemctl enable --now docker
+        sudo: true
+
+  dnf:
+    steps:
+      - cmd: dnf config-manager addrepo --from-repofile https://download.docker.com/linux/fedora/docker-ce.repo
+        sudo: true
+      - cmd: dnf install -y docker-ce
+        sudo: true
+      - cmd: dnf install -y docker-ce-cli
+        sudo: true
+      - cmd: dnf install -y containerd.io
+        sudo: true
+      - cmd: dnf install -y docker-buildx-plugin
+        sudo: true
+      - cmd: dnf install -y docker-compose-plugin
+        sudo: true
+      - cmd: systemctl enable --now docker
+        sudo: true
+
 verify:
   cmd: docker --version
   expect: "Docker version"

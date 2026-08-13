@@ -9,6 +9,16 @@ install:
       - cmd: apt-get install -y unzip
         sudo: true
 
+  pacman:
+    steps:
+      - cmd: pacman -S --noconfirm unzip
+        sudo: true
+
+  dnf:
+    steps:
+      - cmd: dnf install -y unzip
+        sudo: true
+
 verify:
   cmd: unzip -v
   expect: "UnZip"
