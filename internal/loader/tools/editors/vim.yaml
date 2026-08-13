@@ -9,6 +9,16 @@ install:
       - cmd: apt-get install -y vim
         sudo: true
 
+  pacman:
+    steps:
+      - cmd: pacman -S --noconfirm vim
+        sudo: true
+
+  dnf:
+    steps:
+      - cmd: dnf install -y vim
+        sudo: true
+
 verify:
   cmd: vim --version
   expect: VIM

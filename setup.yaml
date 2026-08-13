@@ -4,8 +4,6 @@ tools:
     - docker
   utils:
     - git
-    - vim
-    - neovim
     - htop
     - jq
     - ripgrep
@@ -18,3 +16,6 @@ tools:
     - zsh 
   languages:
     - java@21
+  editors:
+    - vim
+    - neovim
