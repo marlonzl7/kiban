@@ -1,6 +1,9 @@
 version: 1
 tools:
+  containers:
+    - docker
   utils:
+    - build-essential
     - git
     - htop
     - jq
