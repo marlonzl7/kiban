@@ -1,7 +1,5 @@
 version: 1
 tools:
-  containers:
-    - docker
   utils:
     - git
     - htop
@@ -13,9 +11,18 @@ tools:
     - wget
     - xsel
     - zip
-    - zsh 
+    - zsh
   languages:
-    - java@21
+    - java
+    - go
+    - rust
+    - ruby
+    - python
+    - node
   editors:
     - vim
     - neovim
+  databases:
+    - postgresql
+    - sqlite
+    - redis

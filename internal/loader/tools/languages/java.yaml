@@ -2,7 +2,7 @@ name: java
 description: Java Development Kit
 category: languages
 version_flag: java -version
-default_version: 25
+default_version: "25"
 
 install:
   apt:

@@ -1,0 +1,25 @@
+name: redis
+description: In-memory data structure store used as database, cache, and message broker
+category: databases
+version_flag: redis-server --version
+
+install:
+  apt:
+    steps:
+      - cmd: apt-get install -y redis-server
+        sudo: true
+  dnf:
+    steps:
+      - cmd: dnf install -y redis
+        sudo: true
+  pacman:
+    steps:
+      - cmd: pacman -S --noconfirm redis
+        sudo: true
+
+verify:
+  cmd: redis-server --version
+  expect: "server v="
+
+post_install:
+  message: ""

@@ -1,0 +1,25 @@
+name: sqlite
+description: Lightweight file-based SQL database engine (CLI)
+category: databases
+version_flag: sqlite3 --version
+
+install:
+  apt:
+    steps:
+      - cmd: apt-get install -y sqlite3
+        sudo: true
+  dnf:
+    steps:
+      - cmd: dnf install -y sqlite
+        sudo: true
+  pacman:
+    steps:
+      - cmd: pacman -S --noconfirm sqlite
+        sudo: true
+
+verify:
+  cmd: sqlite3 --version
+  expect: "3."
+
+post_install:
+  message: ""
