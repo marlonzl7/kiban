@@ -35,7 +35,7 @@ install:
 
   pacman:
     steps:
-      - cmd: pacman -S --noconfirm docker
+      - cmd: pacman -Syu --noconfirm docker
         sudo: true
       - cmd: systemctl enable --now docker
         sudo: true

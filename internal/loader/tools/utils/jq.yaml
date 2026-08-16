@@ -11,7 +11,7 @@ install:
 
   pacman:
     steps:
-      - cmd: pacman -S --noconfirm jq
+      - cmd: pacman -Syu --noconfirm jq
         sudo: true
 
   dnf:

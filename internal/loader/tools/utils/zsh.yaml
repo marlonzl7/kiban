@@ -11,7 +11,7 @@ install:
 
   pacman:
     steps:
-      - cmd: pacman -S --noconfirm zsh
+      - cmd: pacman -Syu --noconfirm zsh
         sudo: true
 
   dnf:

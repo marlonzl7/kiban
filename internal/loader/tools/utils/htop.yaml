@@ -11,7 +11,7 @@ install:
 
   pacman:
     steps:
-      - cmd: pacman -S --noconfirm htop
+      - cmd: pacman -Syu --noconfirm htop
         sudo: true
 
   dnf:

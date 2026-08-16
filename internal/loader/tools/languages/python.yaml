@@ -14,7 +14,7 @@ install:
         sudo: true
   pacman:
     steps:
-      - cmd: pacman -S --noconfirm python python-pip
+      - cmd: pacman -Syu --noconfirm python python-pip
         sudo: true
 
 verify:

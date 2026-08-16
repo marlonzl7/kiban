@@ -14,7 +14,7 @@ install:
         sudo: true
   pacman:
     steps:
-      - cmd: pacman -S --noconfirm sqlite
+      - cmd: pacman -Syu --noconfirm sqlite
         sudo: true
 
 verify:

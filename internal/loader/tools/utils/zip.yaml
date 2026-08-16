@@ -11,7 +11,7 @@ install:
 
   pacman:
     steps:
-      - cmd: pacman -S --noconfirm zip
+      - cmd: pacman -Syu --noconfirm zip
         sudo: true
 
   dnf:
