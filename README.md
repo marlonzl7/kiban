@@ -90,8 +90,9 @@ padrão disponível, o `kiban` avisa antes de instalar qualquer coisa.
 
 O catálogo completo, com o schema de cada ferramenta, fica em
 [`internal/loader/tools/`](internal/loader/tools/), organizado por categoria
-(`containers/`, `utils/`, `languages/`). Cada arquivo `.yaml` documenta os
-passos de instalação por distro/gerenciador de pacotes.
+(`containers/`, `utils/`, `languages/`, `editors/`, `databases/`). Cada
+arquivo `.yaml` documenta os passos de instalação por distro/gerenciador
+de pacotes.
 
 Distros suportadas: Ubuntu, Fedora, Arch (e derivadas, via `ID_LIKE`).
 
