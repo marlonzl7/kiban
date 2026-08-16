@@ -1,0 +1,27 @@
+name: ruby
+description: Ruby Programming Language
+category: languages
+version_flag: ruby --version
+
+install:
+  apt:
+    steps:
+      - cmd: apt-get install -y ruby-full
+        sudo: true
+
+  pacman:
+    steps:
+      - cmd: pacman -S --noconfirm ruby
+        sudo: true
+
+  dnf:
+    steps:
+      - cmd: dnf install -y ruby
+        sudo: true
+
+verify:
+  cmd: ruby --version
+  expect: ruby
+
+post_install:
+  message: ""

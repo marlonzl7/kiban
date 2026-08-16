@@ -1,0 +1,25 @@
+name: go
+description: Compiled, statically typed programming language designed at Google
+category: languages
+version_flag: go version
+
+install:
+  apt:
+    steps:
+      - cmd: apt-get install -y golang-go
+        sudo: true
+  dnf:
+    steps:
+      - cmd: dnf install -y golang
+        sudo: true
+  pacman:
+    steps:
+      - cmd: pacman -S --noconfirm go
+        sudo: true
+
+verify:
+  cmd: go version
+  expect: "go version"
+
+post_install:
+  message: ""

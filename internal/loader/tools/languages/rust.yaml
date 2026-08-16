@@ -1,0 +1,25 @@
+name: rust
+description: Systems programming language focused on safety and performance
+category: languages
+version_flag: rustc --version
+
+install:
+  apt:
+    steps:
+      - cmd: apt-get install -y rustc cargo
+        sudo: true
+  dnf:
+    steps:
+      - cmd: dnf install -y rust cargo
+        sudo: true
+  pacman:
+    steps:
+      - cmd: pacman -S --noconfirm rust
+        sudo: true
+
+verify:
+  cmd: rustc --version
+  expect: "rustc"
+
+post_install:
+  message: ""

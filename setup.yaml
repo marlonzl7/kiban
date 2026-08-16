@@ -3,6 +3,7 @@ tools:
   containers:
     - docker
   utils:
+    - build-essential
     - git
     - htop
     - jq
@@ -13,9 +14,18 @@ tools:
     - wget
     - xsel
     - zip
-    - zsh 
+    - zsh
   languages:
-    - java@21
+    - java
+    - go
+    - rust
+    - ruby
+    - python
+    - node
   editors:
     - vim
     - neovim
+  databases:
+    - postgresql
+    - sqlite
+    - redis

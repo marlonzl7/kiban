@@ -1,0 +1,44 @@
+name: postgresql
+description: Object-relational database system
+category: databases
+version_flag: psql --version
+
+install:
+  apt:
+    steps:
+      - cmd: apt-get update
+        sudo: true
+      - cmd: apt-get install -y curl ca-certificates
+        sudo: true
+      - cmd: install -d /usr/share/postgresql-common/pgdg
+        sudo: true
+      - cmd: rm -f /usr/share/postgresql-common/pgdg/apt.postgresql.org.asc
+        sudo: true
+      - cmd: curl -o /usr/share/postgresql-common/pgdg/apt.postgresql.org.asc --fail https://www.postgresql.org/media/keys/ACCC4CF8.asc
+        sudo: true
+      - cmd: |
+          sudo tee /etc/apt/sources.list.d/pgdg.list <<EOF
+          deb [signed-by=/usr/share/postgresql-common/pgdg/apt.postgresql.org.asc] https://apt.postgresql.org/pub/repos/apt $(. /etc/os-release && echo "${VERSION_CODENAME}")-pgdg main
+          EOF
+        shell: true
+      - cmd: apt-get update
+        sudo: true
+      - cmd: apt-get install -y postgresql
+        sudo: true
+  dnf:
+    steps:
+      - cmd: sudo dnf install -y https://download.postgresql.org/pub/repos/yum/reporpms/F-$(rpm -E %fedora)-x86_64/pgdg-fedora-repo-latest.noarch.rpm
+        shell: true
+      - cmd: dnf install -y postgresql-server
+        sudo: true
+  pacman:
+    steps:
+      - cmd: pacman -S --noconfirm postgresql
+        sudo: true
+
+verify:
+  cmd: psql --version
+  expect: "psql"
+
+post_install:
+  message: ""
