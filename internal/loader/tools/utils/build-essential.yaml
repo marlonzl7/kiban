@@ -16,7 +16,7 @@ install:
 
   dnf:
     steps:
-      - cmd: dnf groupinstall -y development-tools
+      - cmd: dnf group install -y development-tools
         sudo: true
 
 verify:
