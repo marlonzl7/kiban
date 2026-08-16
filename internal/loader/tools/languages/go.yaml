@@ -14,7 +14,7 @@ install:
         sudo: true
   pacman:
     steps:
-      - cmd: pacman -S --noconfirm go
+      - cmd: pacman -Syu --noconfirm go
         sudo: true
 
 verify:

@@ -41,7 +41,7 @@ install:
         
   pacman:
     steps:
-      - cmd: pacman -S --noconfirm nodejs npm
+      - cmd: pacman -Syu --noconfirm nodejs npm
         sudo: true
 
 verify:

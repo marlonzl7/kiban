@@ -12,7 +12,7 @@ install:
 
   pacman:
     steps:
-      - cmd: pacman -S --noconfirm jdk{{version}}-openjdk
+      - cmd: pacman -Syu --noconfirm jdk{{version}}-openjdk
         sudo: true
 
   dnf:

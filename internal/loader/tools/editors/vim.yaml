@@ -11,7 +11,7 @@ install:
 
   pacman:
     steps:
-      - cmd: pacman -S --noconfirm vim
+      - cmd: pacman -Syu --noconfirm vim
         sudo: true
 
   dnf:

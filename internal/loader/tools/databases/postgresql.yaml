@@ -33,7 +33,7 @@ install:
         sudo: true
   pacman:
     steps:
-      - cmd: pacman -S --noconfirm postgresql
+      - cmd: pacman -Syu --noconfirm postgresql
         sudo: true
 
 verify:

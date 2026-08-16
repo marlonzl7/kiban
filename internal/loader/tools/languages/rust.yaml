@@ -14,7 +14,7 @@ install:
         sudo: true
   pacman:
     steps:
-      - cmd: pacman -S --noconfirm rust
+      - cmd: pacman -Syu --noconfirm rust
         sudo: true
 
 verify:

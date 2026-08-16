@@ -11,7 +11,7 @@ install:
 
   pacman:
     steps:
-      - cmd: pacman -S --noconfirm tree
+      - cmd: pacman -Syu --noconfirm tree
         sudo: true
 
   dnf:

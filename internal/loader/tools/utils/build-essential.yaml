@@ -11,7 +11,7 @@ install:
 
   pacman:
     steps:
-      - cmd: pacman -S --noconfirm base-devel
+      - cmd: pacman -Syu --noconfirm base-devel
         sudo: true
 
   dnf:

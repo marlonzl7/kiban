@@ -14,7 +14,7 @@ install:
         sudo: true
   pacman:
     steps:
-      - cmd: pacman -S --noconfirm redis
+      - cmd: pacman -Syu --noconfirm redis
         sudo: true
 
 verify:
