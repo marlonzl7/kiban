@@ -130,6 +130,13 @@ package manager. O nível 3 é último recurso e exige que o contribuidor
 verifique manualmente que o script é seguro para reexecução, já que não
 há garantia estrutural de idempotência nesse caso.
 
+**Nota — nível pode variar por package manager:** nem toda fonte oficial
+do mantenedor (nível 1) cobre todos os três PMs. Exemplo real:
+PostgreSQL tem repositório oficial (PGDG) para apt e dnf, mas não para
+pacman, nesse caso, o pacman usa nível 2 (repo da distro) enquanto
+apt/dnf usam nível 1, documentado por PM no próprio `install:` da
+ferramenta.
+
 ### Regra 2 — Comandos não-interativos
 
 Todo `cmd` em um arquivo de ferramenta precisa rodar sem exigir
@@ -157,6 +164,13 @@ verify:
   expect: "ripgrep"
 ```
 
+**Nota — `name:` é único, mas o pacote instalado pode ter nomes
+diferentes por PM:** o campo `name` no YAML é o identificador usado no
+`setup.yaml`, não precisa bater literalmente com o pacote de nenhum PM
+específico (assim como `docker` instala `docker-ce`). Cada
+`install.<pm>.steps[].cmd` resolve o nome real do pacote daquele PM
+independentemente.
+
 ### Regra 4 — Verificação de meta-pacotes
 
 Para meta-pacotes (ex: `build-essential`, grupos de desenvolvimento), o
@@ -178,6 +192,14 @@ versão seja resolvida antes da execução — seja pelo usuário informando
 `ferramenta@versão` no `setup.yaml`, seja pelo campo `default_version`
 no arquivo da ferramenta. Sem nenhum dos dois, a instalação falha antes
 de começar, com uma mensagem clara em vez de um erro tardio no comando.
+
+### Nota — Limitação conhecida: `{{version}}` explícito vs. janela de versões da distro
+
+Ferramentas versionadas assumem que o número solicitado existe como
+pacote em todos os PMs suportados — isso já se mostrou falso para Java
+no Fedora (ver seção "Limitações conhecidas" do README). Resolução
+definitiva (schema de `default_version` por PM, ou resolução automática
+por ferramenta) fica para sprint futura — ainda não decidida.
 
 ## Exemplos comentados
 

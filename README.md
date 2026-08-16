@@ -70,7 +70,7 @@ Installing git... [OK]
 Installing curl... [OK]
 Installing zsh... [OK]
 Installing java... [OK]
-Summary: 3 installed, 0 failed
+Summary: 5 installed, 0 failed
 ```
 
 ### Versionamento de ferramentas
@@ -95,6 +95,32 @@ arquivo `.yaml` documenta os passos de instalação por distro/gerenciador
 de pacotes.
 
 Distros suportadas: Ubuntu, Fedora, Arch (e derivadas, via `ID_LIKE`).
+
+## Limitações conhecidas
+
+- **`java@<versão>` pode falhar no Fedora**: o Fedora remove versões
+  antigas de OpenJDK dos repositórios padrão conforme lança novas (ex:
+  `java-21-openjdk` deixou de existir a partir do Fedora 44). Se a
+  instalação falhar com "nenhuma correspondência", ajuste a versão
+  solicitada no `setup.yaml` para uma disponível na sua versão do
+  Fedora, ou omita a versão (`java` em vez de `java@21`) e ajuste
+  `default_version` em `tools/languages/java.yaml`.
+
+- **Node no Arch (pacman) ignora a versão solicitada**: o pacote
+  `nodejs` não é versionado por major nesse PM, diferente de apt/dnf —
+  sempre instala a versão mais recente do repositório oficial,
+  independente de `node@<versão>` no `setup.yaml`.
+
+- **Redis pode resolver para Valkey**: Fedora e Arch já substituem o
+  pacote `redis` por Valkey (fork open-source compatível) nos
+  repositórios padrão; Ubuntu ainda mantém Redis genuíno. A
+  verificação pós-instalação aceita ambos.
+
+- **GPG pode falhar silenciosamente na primeira execução em VM
+  totalmente nova** (instalação do Node via apt): o keyring pode ficar
+  vazio/não convertido na primeira chamada de `gpg --dearmor`,
+  causando erro de assinatura no `apt-get update` seguinte.
+  Reexecutar `kiban install` resolve.
 
 ## Aviso de segurança
 
