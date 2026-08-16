@@ -23,7 +23,7 @@ você mantém no seu GitHub e roda sempre que precisar.
 Baixe o binário mais recente na [página de releases](https://github.com/marlonzl7/kiban/releases).
 
 ```bash
-curl -L -o kiban https://github.com/marlonzl7/kiban/releases/latest/download/kiban_v0.1.0_linux_amd64
+curl -L -o kiban https://github.com/marlonzl7/kiban/releases/latest/download/kiban_v0.2.0_linux_amd64
 chmod +x kiban
 sudo mv kiban /usr/local/bin/
 ```
