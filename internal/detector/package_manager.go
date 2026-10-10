@@ -1,12 +1,16 @@
 package detector
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 var distroToPackageManager = map[string]string{
 	"ubuntu":  "apt",
 	"debian":  "apt",
 	"fedora":  "dnf",
 	"rhel":    "dnf",
+	"centos":  "dnf",
 	"arch":    "pacman",
 	"manjaro": "pacman",
 }
@@ -16,8 +20,10 @@ func DetectPackageManager(info InfoDistro) (string, error) {
 		return pm, nil
 	}
 
-	if pm, exists := distroToPackageManager[info.IDLike]; exists {
-		return pm, nil
+	for _, like := range strings.Fields(info.IDLike) {
+		if pm, exists := distroToPackageManager[like]; exists {
+			return pm, nil
+		}
 	}
 
 	return "", fmt.Errorf("unsupported distro")
