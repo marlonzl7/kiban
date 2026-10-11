@@ -36,3 +36,29 @@ func TestDetectPackageManager_UnsupportedDistro(t *testing.T) {
 		t.Error("expected an error, got nil")
 	}
 }
+
+func TestDetectPackageManager_MultipleIDLike(t *testing.T) {
+	info := InfoDistro{ID: "almalinux", IDLike: "rhel centos fedora"}
+	pm, err := DetectPackageManager(info)
+
+	if err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	if pm != "dnf" {
+		t.Errorf("expected %q, got %q", "dnf", pm)
+	}
+}
+
+func TestDetectPackageManager_IDLikeFirstUnknownSecondKnown(t *testing.T) {
+	info := InfoDistro{ID: "foo", IDLike: "unknown ubuntu debian"}
+	pm, err := DetectPackageManager(info)
+
+	if err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	if pm != "apt" {
+		t.Errorf("expected %q, got %q", "apt", pm)
+	}
+}

@@ -40,8 +40,27 @@ func TestDetectDistro_LinuxMint(t *testing.T) {
 	}
 }
 
+func TestDetectDistro_AlmaLinux(t *testing.T) {
+	info, err := DetectDistro("testdata/almalinux")
+	if err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	if info.ID != "almalinux" {
+		t.Errorf("ID: expected %q, got %q", "almalinux", info.ID)
+	}
+
+	if info.IDLike != "rhel centos fedora" {
+		t.Errorf("IDLike: expected %q, got %q", "rhel centos fedora", info.IDLike)
+	}
+
+	if info.Version != "9.8" {
+		t.Errorf("Version: expected %q, got %q", "9.8", info.Version)
+	}
+}
+
 func TestDetectDistro_MissingID(t *testing.T) {
-	_, err := DetectDistro("testdata/sem_id")
+	_, err := DetectDistro("testdata/missing_id")
 
 	if err == nil {
 		t.Error("expected an error, got nil")
