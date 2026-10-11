@@ -60,7 +60,7 @@ func TestDetectDistro_AlmaLinux(t *testing.T) {
 }
 
 func TestDetectDistro_MissingID(t *testing.T) {
-	_, err := DetectDistro("testdata/sem_id")
+	_, err := DetectDistro("testdata/missing_id")
 
 	if err == nil {
 		t.Error("expected an error, got nil")
